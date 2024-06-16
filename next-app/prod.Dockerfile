@@ -19,8 +19,7 @@ RUN \
 COPY app ./app
 COPY public ./public
 COPY .eslintrc.json .
-COPY .gitignore .
-COPY next-env.d.ts .
+COPY next-env.d.ts .  
 COPY next.config.mjs .
 COPY postcss.config.mjs .
 COPY README.md .
