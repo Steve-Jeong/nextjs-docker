@@ -7,6 +7,15 @@ const config: Config = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    screens: {
+      '2xs': '300px', // 300px 이상의 화면에 적용
+      'xs': '400px', // 400px 이상의 화면에 적용
+      'sm': '640px', 
+      'md': '768px',
+      'lg': '1024px', 
+      'xl': '1280px',
+      '2xl': '1536px'  
+    },
     extend: {
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
