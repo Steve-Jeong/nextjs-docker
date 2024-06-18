@@ -6,6 +6,7 @@ import { MdDirectionsCar } from "react-icons/md";
 import { FaUser } from "react-icons/fa";
 import { LuMenu } from "react-icons/lu";
 import { IoLogInOutline } from "react-icons/io5";
+import { IoLogOutOutline } from "react-icons/io5";
 import Link from "next/link";
 
 const NavBar = () => {
@@ -27,10 +28,20 @@ const NavBar = () => {
       <div className="flex items-center gap-4">
         <div>
           {status === 'loading' && <div>loading ...</div>}
-          {status === 'authenticated' && <div>{session.user!.name}</div>}
+          {status === 'authenticated' && 
+            <div className="flex gap-x-2 items-center text-[">
+              {session.user!.name}
+              <Link
+                href="/api/auth/signout"
+                className="flex flex-col items-center"
+              >
+                <IoLogOutOutline size={15} color="581C87" />
+                <div className="text-xs text-purple-900">Logout</div>
+              </Link>
+            </div>}
           {status === 'unauthenticated' && 
             <Link
-              href="/api/auth/signin"
+              href="/auth/login"
               className="flex flex-col items-center"
             >
               <IoLogInOutline size={20} color="581C87" />
