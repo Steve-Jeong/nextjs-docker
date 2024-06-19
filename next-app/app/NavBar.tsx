@@ -1,6 +1,3 @@
-'use client'
-
-import { useSession } from "next-auth/react";
 import React from "react";
 import { MdDirectionsCar } from "react-icons/md";
 import { FaUser } from "react-icons/fa";
@@ -8,9 +5,11 @@ import { LuMenu } from "react-icons/lu";
 import { IoLogInOutline } from "react-icons/io5";
 import { IoLogOutOutline } from "react-icons/io5";
 import Link from "next/link";
+import { getServerSession } from 'next-auth';
+import { authOptions } from "./api/auth/authOptions/authOptions";
 
-const NavBar = () => {
-  const {status, data: session} = useSession()
+const NavBar = async () => {
+  const session = await getServerSession(authOptions)
 
   return (
     
@@ -27,26 +26,26 @@ const NavBar = () => {
       </Link>
       <div className="flex items-center gap-4">
         <div>
-          {status === 'loading' && <div>loading ...</div>}
-          {status === 'authenticated' && 
-            <div className="flex gap-x-2 items-center text-[">
+          {session 
+            ?
+              <div className="flex gap-x-2 items-center text-[">
               {session.user!.name}
+                <Link
+                  href="/api/auth/signout"
+                  className="flex flex-col items-center"
+                >
+                  <IoLogOutOutline size={15} color="581C87" />
+                  <div className="text-xs text-purple-900">Logout</div>
+                </Link>
+              </div>
+            :
               <Link
-                href="/api/auth/signout"
-                className="flex flex-col items-center"
-              >
-                <IoLogOutOutline size={15} color="581C87" />
-                <div className="text-xs text-purple-900">Logout</div>
+                  href="/auth/login"
+                  className="flex flex-col items-center"
+                >
+                <IoLogInOutline size={20} color="581C87" />
+                <div className="text-xs text-purple-900">Login</div>
               </Link>
-            </div>}
-          {status === 'unauthenticated' && 
-            <Link
-              href="/auth/login"
-              className="flex flex-col items-center"
-            >
-              <IoLogInOutline size={20} color="581C87" />
-              <div className="text-xs text-purple-900">Login</div>
-            </Link>
           }
           {/* <Link
             href="/api/auth/user-dashboard"
