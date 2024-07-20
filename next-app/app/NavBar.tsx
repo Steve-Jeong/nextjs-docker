@@ -40,7 +40,7 @@ const NavBar = async () => {
               </div>
             :
               <Link
-                  href="/auth/login"
+                  href="/api/auth/signin"
                   className="flex flex-col items-center"
                 >
                 <IoLogInOutline size={20} color="581C87" />
